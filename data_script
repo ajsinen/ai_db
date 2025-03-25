@@ -1,0 +1,96 @@
+CREATE TABLE province (
+    province_id BIGINT PRIMARY KEY,
+    province_name VARCHAR NOT NULL
+);
+
+CREATE TABLE city (
+    city_id BIGINT PRIMARY KEY,
+    city_name VARCHAR NOT NULL,
+    province_id BIGINT REFERENCES province(province_id) ON DELETE SET NULL
+);
+
+CREATE TABLE institution (
+    institution_id BIGINT PRIMARY KEY,
+    insti_name VARCHAR NOT NULL
+);
+
+CREATE TABLE staff (
+    staff_id SERIAL PRIMARY KEY,
+    first_name VARCHAR NOT NULL,
+    last_name VARCHAR NOT NULL,
+    birthday TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    province_id BIGINT REFERENCES province(province_id) ON DELETE SET NULL,
+    city_id BIGINT REFERENCES city(city_id) ON DELETE SET NULL,
+    institution_id BIGINT REFERENCES institution(institution_id) ON DELETE SET NULL
+);
+
+-- Insert sample data for Province
+INSERT INTO province (province_id, province_name) VALUES
+(1, 'Laguna'),
+(2, 'Quezon'),
+(3, 'Batangas'),
+(4, 'Rizal'),
+(5, 'Cavite');
+
+-- Insert sample data for City
+INSERT INTO city (city_id, city_name, province_id) VALUES
+(1, 'San Pablo', 1),
+(2, 'Calauan', 1),
+(3, 'Bay', 1),
+(4, 'Calamba', 1);
+
+-- Insert sample data for Institution
+INSERT INTO institution (institution_id, insti_name) VALUES
+(1, 'Bakawan Data Analytics'),
+(2, 'FDSAP'),
+(3, 'CMIT'),
+(4, 'Likha ni Inay');
+
+-- Insert sample data for Staff (50 people)
+INSERT INTO staff (first_name, last_name, birthday, province_id, city_id, institution_id) VALUES
+('John', 'Doe', '1990-05-15', 1, 1, 1),
+('Jane', 'Smith', '1985-09-20', 1, 2, 2),
+('Michael', 'Brown', '1992-07-11', 2, 3, 3),
+('Emily', 'Davis', '1995-03-25', 3, 4, 4),
+('Daniel', 'Miller', '1988-11-08', 4, 1, 1),
+('Sarah', 'Wilson', '1993-06-17', 5, 2, 2),
+('Chris', 'Taylor', '1980-12-30', 1, 3, 3),
+('Laura', 'Anderson', '1975-08-05', 2, 4, 4),
+('David', 'Thomas', '1999-01-12', 3, 1, 1),
+('Sophia', 'Moore', '1991-10-21', 4, 2, 2),
+('James', 'Jackson', '1987-04-09', 5, 3, 3),
+('Olivia', 'White', '1996-02-14', 1, 4, 4),
+('Ethan', 'Harris', '1983-07-29', 2, 1, 1),
+('Emma', 'Clark', '1994-09-07', 3, 2, 2),
+('Liam', 'Lewis', '1997-12-05', 4, 3, 3),
+('Ava', 'Walker', '1998-06-19', 5, 4, 4),
+('Noah', 'Allen', '1982-03-11', 1, 1, 1),
+('Isabella', 'Young', '1993-08-23', 2, 2, 2),
+('Mason', 'King', '1986-05-30', 3, 3, 3),
+('Charlotte', 'Wright', '2000-04-04', 4, 4, 4),
+('Logan', 'Lopez', '1995-10-10', 5, 1, 1),
+('Amelia', 'Hill', '1989-12-25', 1, 2, 2),
+('Alexander', 'Scott', '1984-07-15', 2, 3, 3),
+('Mia', 'Green', '1992-01-19', 3, 4, 4),
+('Benjamin', 'Adams', '1990-06-02', 4, 1, 1),
+('Harper', 'Baker', '1996-11-17', 5, 2, 2),
+('Elijah', 'Gonzalez', '1981-08-31', 1, 3, 3),
+('Evelyn', 'Nelson', '1997-05-08', 2, 4, 4),
+('Daniel', 'Carter', '1993-09-27', 3, 1, 1),
+('Scarlett', 'Mitchell', '1998-02-03', 4, 2, 2),
+('Matthew', 'Perez', '1985-07-12', 5, 3, 3),
+('Madison', 'Roberts', '1994-04-15', 1, 4, 4),
+('Henry', 'Turner', '1987-06-26', 2, 1, 1),
+('Ella', 'Phillips', '1991-12-09', 3, 2, 2),
+('Jackson', 'Campbell', '1999-10-05', 4, 3, 3),
+('Avery', 'Parker', '1983-05-20', 5, 4, 4),
+('Sebastian', 'Evans', '1990-09-13', 1, 1, 1),
+('Grace', 'Edwards', '1995-03-14', 2, 2, 2),
+('Jack', 'Collins', '1986-01-25', 3, 3, 3),
+('Lily', 'Stewart', '2001-07-09', 4, 4, 4),
+('Luke', 'Sanchez', '1988-10-31', 5, 1, 1),
+('Zoey', 'Morris', '1993-11-22', 1, 2, 2),
+('Oliver', 'Rogers', '1997-06-28', 2, 3, 3),
+('Hannah', 'Reed', '1984-02-17', 3, 4, 4),
+('Nathan', 'Cook', '1992-08-01', 4, 1, 1),
+('Chloe', 'Morgan', '1996-04-07', 5, 2, 2);
