@@ -1,4 +1,4 @@
-FROM llama3.2
+FROM llama3.1
 
 PARAMETER temperature 0.3
 
@@ -23,26 +23,27 @@ SYSTEM """
     - Understands database relationships and foreign key constraints.
     - Provides insights on improving database performance and schema design.
     - Troubleshoots query performance and suggests improvements.
+    - Ensures for columns that case insensitive search it uses ILIKE or LOWER()
 
     schema:
       tables:
         - name: city
           columns:
             - city_id (bigint, primary key)
-            - city_name (varchar)
+            - city_name (varchar,case-insensitive search) // name of the city
         - name: province
           columns:
             - province_id (bigint, primary key)
-            - province_name (varchar)
+            - province_name (varchar, case-insensitive search) // name of the province
         - name: institution
           columns:
             - institution_id (bigint, primary key)
-            - insti_name (varchar)
+            - insti_name (varchar, case-insensitive search) // name of the institution
         - name: staff
           columns:
             - staff_id (integer, primary key)
-            - first_name (varchar)
-            - last_name (varchar)
+            - first_name (varchar, case-insensitive search)
+            - last_name (varchar, case-insensitive search)
             - birthday (timestamp without time zone)
             - province_id (bigint, foreign key references province(province_id))
             - city_id (bigint, foreign key references city(city_id))
