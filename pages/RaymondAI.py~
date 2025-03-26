@@ -32,9 +32,7 @@ print(f"-->>> This is your query : {query}")
 
 if query:
     with st.spinner("Generating SQL query..."):  # Show loading spinner
-        gif_placeholder = st.empty()
-        gif_placeholder.image("images/mond.gif", caption="Please wait...", use_container_width=True)
-
+        st.image("images/mond.gif", caption="Please wait...", use_container_width=True)
         request = {
             "model": model,
             "prompt": query,
@@ -44,7 +42,6 @@ if query:
         response = requests.post(url=ollama_url.get("generate"), json=request)
         resp = response.json()
 
-        gif_placeholder.empty()
         # Print full response
         orig_resp = resp.get("response")
         print("-->>> AI response : ", orig_resp)

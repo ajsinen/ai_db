@@ -1,0 +1,26 @@
+import streamlit as st
+import ollama
+import requests
+
+
+st.title("Hello!! my name is Raymond, your Personal Assistant")
+
+ollama_url = {
+    "generate": "http://localhost:11434/api/generate",
+    "chat": "http://localhost:11434/api/chat",
+}
+
+
+query = st.chat_input("Ask me anything")
+print(f"-->>> This is your query : {query}")
+
+if query:
+    request = {
+        "model": "aki",
+        "prompt": query,
+        "stream": False,
+    }
+    response = requests.post(url=ollama_url.get("generate"), json=request)
+    resp = response.json()
+    st.write(resp.get("response"))
+

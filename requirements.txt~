@@ -3,4 +3,3 @@ streamlit
 FastAPI
 uvicorn
 asyncpg
-databases
