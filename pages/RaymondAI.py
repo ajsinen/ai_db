@@ -5,9 +5,12 @@ import db_call
 import asyncio
 
 model = "raymond"
-
-st.title("Hello!! my name is Raymond, your personal Database administrator")
-
+col1, col2 = st.columns([1,5])
+with col1:
+    st.image("image.jpg", width=50)
+with col2:
+    st.title("raymondAI")
+st.write("Hello I'm raymond, your personal Database Administrator")
 ollama_url = {
     "generate": "http://localhost:11434/api/generate",
     "chat": "http://localhost:11434/api/chat",
